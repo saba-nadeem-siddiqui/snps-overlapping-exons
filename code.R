@@ -4,8 +4,8 @@ library(GenomicRanges)
 library(readxl)
 
 # Read the files
-exons <- read.csv("C:/Users/saba1/Documents/PROJECTS/Learning/snps-on-exon/Exons.csv")
-snps <- read.csv("C:/Users/saba1/Documents/PROJECTS/Learning/snps-on-exon/SNP.csv")
+exons <- read.csv("Exons.csv")
+snps <- read.csv("SNP.csv")
 
 
 
