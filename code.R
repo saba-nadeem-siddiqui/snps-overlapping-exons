@@ -35,7 +35,13 @@ GRsnp <- GRanges(seqnames = snpChrValue,
                  ranges = IRanges(start = snpStartValue,
                                   end = snpEndValue))
 
+#Find SNPs which overlap Exons
+OverlappingRegions <- as.data.frame(findOverlaps(GRexon, GRsnp))
 
+exonRows <- OverlappingRegions$queryHits
+snpRows <- OverlappingRegions$subjectHits
+
+OverlappedDF <- cbind(exons[exonRows,], snps[snpRows,])
 
 
 
