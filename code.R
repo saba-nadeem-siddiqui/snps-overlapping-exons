@@ -3,11 +3,11 @@ library(BiocManager)
 library(GenomicRanges)
 library(readxl)
 library(dplyr)
+library(bedr)
 
 # Read the files
 exons <- read.csv("Exons.csv")
 snps <- read.csv("SNP.csv")
-
 
 
 # Store the value of each column in a vector (exons)
@@ -36,6 +36,7 @@ GRsnp <- GRanges(seqnames = snpChrValue,
                  ranges = IRanges(start = snpStartValue,
                                   end = snpEndValue))
 
+
 #Find SNPs which overlap exons
 OverlappingRegions <- as.data.frame(findOverlaps(GRexon, GRsnp))
 
@@ -51,8 +52,25 @@ groupedDF <- OverlappedDF |>
   summarise(Repeats = n()) |>  #Count occurrence of each exon
   arrange(-Repeats)  #Arrange in exon occurrence in decreasing order
 
-toprows <- head(groupedDF, 5)
+mostsnps <- head(groupedDF, 5)
 
 
+# Join the main exons file with top 5 rows
+joinedDF <- exons |>
+  inner_join(mostsnps, by = "exonID")
 
+
+# Rearrange columns to fit BED6 format
+RearrangedDF <- joinedDF |> 
+  select(1:4, exonScore = Repeats, exonStrand)
+
+
+# Rename columns according to BED format
+TopExons <- RearrangedDF |> 
+  rename(Chrom = exonChromosome, 
+         Start = exonStart, 
+         End = exonEnd,
+         Name = exonID,
+         Score = exonScore,
+         Strand = exonStrand)
 
