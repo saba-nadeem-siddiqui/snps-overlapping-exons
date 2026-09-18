@@ -40,7 +40,7 @@ This script can also be used to find out several other overlapping features on a
 - End position
 - Exon name
 - Score
-- Strand
+- Strand <br>
 (ii) Add 'exon' and 'snp' in column names of both exon and snp files respectively <br>
 (iii) Save in CSV (comma separated) format <br>
 
