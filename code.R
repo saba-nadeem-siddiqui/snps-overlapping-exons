@@ -3,7 +3,6 @@ library(BiocManager)
 library(GenomicRanges)
 library(readxl)
 library(dplyr)
-library(bedr)
 
 # Read the files
 exons <- read.csv("Exons.csv")
@@ -65,12 +64,12 @@ RearrangedDF <- joinedDF |>
   select(1:4, exonScore = Repeats, exonStrand)
 
 
-# Rename columns according to BED format
-TopExons <- RearrangedDF |> 
-  rename(Chrom = exonChromosome, 
-         Start = exonStart, 
-         End = exonEnd,
-         Name = exonID,
-         Score = exonScore,
-         Strand = exonStrand)
+
+# Remove column names to fit UCSC BED format
+names(RearrangedDF) <- NULL
+
+# Save output in a tab delimited file
+output <- "Topexons.txt"
+write.table(RearrangedDF, file = output, sep = "\t",
+            row.names = FALSE, quote = FALSE)
 
