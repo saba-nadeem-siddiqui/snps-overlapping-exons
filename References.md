@@ -1,6 +1,6 @@
 # References
 
-This analysis is based on a workflow demonstrated in . <br> 
+This analysis is based on a workflow demonstrated in Galaxy. <br> 
 It's downstream analysis was then implemented in R, which includes data manipulation, finding overlaps and 
 generating a result which can be visualized in the UCSC Genome Browser.
 
