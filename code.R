@@ -1,5 +1,4 @@
 
-library(BiocManager)
 library(GenomicRanges)
 library(readxl)
 library(dplyr)
